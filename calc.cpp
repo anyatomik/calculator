@@ -8,7 +8,7 @@ void Expression::cleanSpaces(){
 	for (char c : exp) {
 		if (c != ' ') {
 			a += c;
-		0}
+		}
 	}
 	exp = a;
 }
@@ -31,7 +31,7 @@ void Expression::distribution() {
 			numbers.emplace_back(temp);
 			temp.clear();
 			temp += c;
-			signs.emplace_back(temp);
+			signs.emplace_back(c);
 			temp.clear();
 		}
 	}
@@ -40,6 +40,7 @@ void Expression::distribution() {
 	}
 }
 int Expression::calculate() {
+	
 	if (allRight()) {
 		distribution();
 		int siz = signs.size();
