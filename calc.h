@@ -8,7 +8,7 @@ public:
 	Expression(std::string new_exp);
 	void cleanSpaces();
 	bool allRight();
-	void dstribution();
+	void distribution();
 	void calculate();
 private:
 	std::string exp;
