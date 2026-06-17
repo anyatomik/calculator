@@ -8,11 +8,12 @@ void Expression::cleanSpaces(){
 	for (char c : exp) {
 		if (c != ' ') {
 			a += c;
-		}
+		0}
 	}
 	exp = a;
 }
 bool Expression::allRight(){
+	cleanSpaces();
 	for (char c : exp ) {
 		if ((c  < '0' ||  c > '9') && ( c != '+' && c != '-')){
 			return false;
@@ -38,8 +39,7 @@ void Expression::distribution() {
 		numbers.emplace_back(temp);
 	}
 }
-void Expression::calculate() {
-	cleanSpaces();
+int Expression::calculate() {
 	if (allRight()) {
 		distribution();
 		int siz = signs.size();
@@ -53,5 +53,6 @@ void Expression::calculate() {
 			}
 		} 
 	}
+	return result;
 }
 

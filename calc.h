@@ -9,10 +9,10 @@ public:
 	void cleanSpaces();
 	bool allRight();
 	void distribution();
-	void calculate();
+	int calculate();
 private:
 	std::string exp;
 	std::vector<std::string> numbers;
-	std::vector<std::string> signs;
+	std::vector<char> signs;
 	int result;
 };
