@@ -15,7 +15,7 @@ void Expression::cleanSpaces(){
 bool Expression::allRight(){
 	cleanSpaces();
 	for (char c : exp ) {
-		if ((c  < '0' ||  c > '9') && ( c != '+' && c != '-')){
+		if ((c  < '0' ||  c > '9') && ( c != '+' && c != '-' && c != '*' && c != '/')){
 			return false;
 		}
 	}
@@ -27,7 +27,7 @@ void Expression::distribution() {
 		if (c >= '0' && c  <= '9') {
 		temp += c;
 		}
-		else if  (c == '+' || c== '-') {
+		else if  (c == '+' || c== '-' || c == '/' || c == '*') {
 			numbers.emplace_back(temp);
 			temp.clear();
 			temp += c;
@@ -38,6 +38,7 @@ void Expression::distribution() {
 	if (temp != "") {
 		numbers.emplace_back(temp);
 	}
+
 }
 int Expression::calculate() {
 	
@@ -52,6 +53,12 @@ int Expression::calculate() {
 			else if (signs[i] == '-') {
 				result -= std::stoi(numbers[i+1]);
 			}
+			else if (signs[i] == '*') {
+                                result *= std::stoi(numbers[i+1]);
+                        }
+			else if (signs[i] == '/') {
+                                result /= std::stoi(numbers[i+1]);
+                        }
 		} 
 	}
 	return result;
