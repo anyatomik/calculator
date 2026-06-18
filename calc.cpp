@@ -14,11 +14,18 @@ void Expression::cleanSpaces(){
 }
 bool Expression::allRight(){
 	cleanSpaces();
+	bool zero = false;
 	if (!exp.empty()) {
-	for (char c : exp ) {
-		if ((c  < '0' ||  c > '9') && ( c != '+' && c != '-' && c != '*' && c != '/')){
+	for (int i = exp.size() - 1; i  >= 0; i--) {
+		if ((exp[i]  < '0' ||  exp[i] > '9') && (exp[i]  != '+' && exp[i] != '-' && exp[i] != '*' && exp[i] != '/')){
 			return false;
 		}
+		if (exp[i] == '0') {
+			zero = true;
+		}
+		if (zero && exp[i] == '/') {
+			return false;
+		} 
 	}
 	return exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-' && exp.back() != '/' && exp.back() != '*' && exp[0] != '/' && exp[0] != '*';}
 	return false;
