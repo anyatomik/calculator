@@ -14,12 +14,14 @@ void Expression::cleanSpaces(){
 }
 bool Expression::allRight(){
 	cleanSpaces();
+	if (!exp.empty()) {
 	for (char c : exp ) {
 		if ((c  < '0' ||  c > '9') && ( c != '+' && c != '-' && c != '*' && c != '/')){
 			return false;
 		}
 	}
-	return exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-';
+	return exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-' && exp.back() != '/' && exp.back() != '*' && exp[0] != '/' && exp[0] != '*';}
+	return false;
 }
 void Expression::distribution() {
 	std::string temp = "";
