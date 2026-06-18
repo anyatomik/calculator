@@ -15,19 +15,21 @@ void Expression::cleanSpaces(){
 bool Expression::allRight(){
 	cleanSpaces();
 	bool zero = false;
-	if (!exp.empty()) {
+	if (!exp.empty() && exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-' && exp.back() != '/' && exp.back() != '*' && exp[0] != '/' && exp[0] != '*') {
 	for (int i = exp.size() - 1; i  >= 0; i--) {
+		zero = false;
 		if ((exp[i]  < '0' ||  exp[i] > '9') && (exp[i]  != '+' && exp[i] != '-' && exp[i] != '*' && exp[i] != '/')){
 			return false;
 		}
 		if (exp[i] == '0') {
 			zero = true;
-		}
-		if (zero && exp[i] == '/') {
-			return false;
+			
 		} 
+		if (zero && i > 0 && exp[i-1] == '/') {
+			return false;
+		}
 	}
-	return exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-' && exp.back() != '/' && exp.back() != '*' && exp[0] != '/' && exp[0] != '*';}
+	return true;}
 	return false;
 }
 void Expression::distribution() {
