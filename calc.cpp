@@ -41,7 +41,6 @@ void Expression::distribution() {
 		else if  (c == '+' || c== '-' || c == '/' || c == '*') {
 			numbers.emplace_back(temp);
 			temp.clear();
-			temp += c;
 			signs.emplace_back(c);
 			temp.clear();
 		}
