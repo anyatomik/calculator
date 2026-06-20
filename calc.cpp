@@ -1,36 +1,23 @@
 #include "calc.h"
+#include <algorithm>
+#include <stdexcept>
 
 Expression::Expression(std::string new_exp) {
 	exp = new_exp;
 }
 void Expression::cleanSpaces(){
-	std::string a = "";
-	for (char c : exp) {
-		if (c != ' ') {
-			a += c;
-		}
-	}
-	exp = a;
+	exp.erase(std::remove(exp.begin(), exp.end(), ' '), exp.end());
 }
 bool Expression::allRight(){
 	cleanSpaces();
-	bool zero = false;
-	if (!exp.empty() && exp.back() != '+' && exp.back() != '-' && exp[0] != '+' && exp[0] != '-' && exp.back() != '/' && exp.back() != '*' && exp[0] != '/' && exp[0] != '*') {
+	if (exp.empty() || exp.back() == '+' || exp.back() == '-' || exp.front() == '+' || exp.front() == '-' || exp.back() == '/' || exp.back() == '*' || exp.front() == '/' || exp.front() == '*')
+	 {return false;}
 	for (int i = exp.size() - 1; i  >= 0; i--) {
-		zero = false;
 		if ((exp[i]  < '0' ||  exp[i] > '9') && (exp[i]  != '+' && exp[i] != '-' && exp[i] != '*' && exp[i] != '/')){
 			return false;
 		}
-		if (exp[i] == '0') {
-			zero = true;
-			
-		} 
-		if (zero && i > 0 && exp[i-1] == '/') {
-			return false;
 		}
-	}
-	return true;}
-	return false;
+	return true;
 }
 void Expression::distribution() {
 	std::string temp = "";
@@ -51,7 +38,7 @@ void Expression::distribution() {
 
 }
 int Expression::calculate() {
-	
+
 	if (allRight()) {
 		distribution();
 		int siz = signs.size();
@@ -67,9 +54,10 @@ int Expression::calculate() {
                                 result *= std::stoi(numbers[i+1]);
                         }
 			else if (signs[i] == '/') {
+                                if (std::stoi(numbers[i+1]) == 0){throw std::runtime_error("Division by zero!");}
                                 result /= std::stoi(numbers[i+1]);
                         }
-		} 
+		}
 	}
 	return result;
 }
