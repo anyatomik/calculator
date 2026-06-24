@@ -24,7 +24,7 @@ Write any expression using "+", "-", "/" or "*" with positive integers: 2 + 2 * 
 8
 That's your answer! Do you want to try another one [y/n]? 
 ```
->  **Note:** There is no operator precedence. Operations are evaluated strictly from left to right, so `2 + 2 * 2` will produce `8`, not `6`.
+>  **Note:** The program does not support brackets `()` .
 
 ## License
 
