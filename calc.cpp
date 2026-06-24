@@ -44,24 +44,35 @@ int Expression::calculate() {
     if (allRight()) {
         distribution();
         int siz = signs.size();
-        result = std::stoi(numbers[0]);
-        for (int i = 0;
-        i < siz;
-        i++) {
-            if (signs[i] == '+') {
-                result += std::stoi(numbers[i+1]);
-            }
-            else if (signs[i] == '-') {
-                result -= std::stoi(numbers[i+1]);
-            }
-            else if (signs[i] == '*') {
-                result *= std::stoi(numbers[i+1]);
+        int temp = 0;
+        int i = 0;
+        while (i < signs.size()) {
+            if (signs[i] == '*') {
+                temp = std::stoi(numbers[i+1]) * std::stoi(numbers[i]);
+                numbers[i] = std::to_string(temp);
+                numbers.erase(numbers.begin() + i + 1);
+                signs.erase(signs.begin()+ i);
             }
             else if (signs[i] == '/') {
                 if (std::stoi(numbers[i+1]) == 0) {
                     throw std::runtime_error("Division by zero!");
                 }
-                result /= std::stoi(numbers[i+1]);
+                 temp = std::stoi(numbers[i]) / std::stoi(numbers[i+1]);
+                 numbers[i] = std::to_string(temp);
+                 numbers.erase(numbers.begin() + i + 1);
+                 signs.erase(signs.begin()+ i);
+            }
+            else {
+                i++;
+            }
+        }
+        result = std::stoi(numbers[0]);
+        for (int i = 0; i < siz; i++) {
+            if (signs[i] == '+') {
+                result += std::stoi(numbers[i+1]);
+            }
+            else if (signs[i] == '-') {
+                result -= std::stoi(numbers[i+1]);
             }
         }
     }
